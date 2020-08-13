@@ -54,7 +54,7 @@ foreach($settings as $key => $value) {
 	echo '<td>'.$settings[$key]['port'].'</td>';
 	echo '<td>'.$settings[$key]['key'].'</td>';
 	echo '<td>'.$settings[$key]['port'].'</td>';
-	echo '<td><a href="settings.php?type=choice-config&config='.$key.'">选中</a></td>';
+	echo '<td><a href="settings.php?type=choice-config&config='.$key.'">切换</a></td>';
 	echo '<td><a href="settings.php?update='.$key.'">修改</a></td>';
 	echo '</tr>';
 }

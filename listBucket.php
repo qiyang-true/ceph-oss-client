@@ -2,7 +2,7 @@
 require 'connect.php';
 include 'header.php';
 echo "Current Bucket：".$bucketname = $_GET['bucketname'];
-
+echo ' <a href="uploadFile.php?bucketname='.$bucketname.'">上传文件</a> <a href="createFile.php?bucketname='.$bucketname.'">创建文件</a>';
 if($bucketname){
 	$ObjectsListResponse = $Connection->list_objects($bucketname);
 	$Objects = $ObjectsListResponse->body->Contents;

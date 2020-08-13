@@ -27,8 +27,8 @@ foreach ($Buckets as $Bucket) {
 	echo '<tr>';
 	echo '<td><a href="listBucket.php?bucketname='.$Bucket->Name.'">'.$Bucket->Name.'</a></td>';
 	echo '<td>'.$Bucket->CreationDate.'</td>';
-	echo '<td><a href="createFile.php?bucketname='.$Bucket->Name.'">创建文件</a></td>';
 	echo '<td><a href="uploadFile.php?bucketname='.$Bucket->Name.'">上传文件</a></td>';
+	echo '<td><a href="createFile.php?bucketname='.$Bucket->Name.'">创建文件</a></td>';
 	echo '<td><a href="deleteBucket.php?bucketname='.$Bucket->Name.'">删除</a></td>';
 	echo '<td><a href="deleteBucket.php?bucketname='.$Bucket->Name.'&force=true">强制删除</a></td>';
 	echo '</tr>';
