@@ -1,12 +1,19 @@
 <?php
-include 'connect.php';
-header('content-type:text/html;charset=utf-8');
-echo $bucketname = $_GET['bucketname'];
+require 'connect.php';
+include 'header.php';
+echo "Current Bucket：".$bucketname = $_GET['bucketname'];
 
 if($bucketname){
 	$ObjectsListResponse = $Connection->list_objects($bucketname);
 	$Objects = $ObjectsListResponse->body->Contents;
 	echo '<table>';
+	echo '<tr>';
+	echo '<th>num</th>';
+	echo '<th>Bucket</th>';
+	echo '<th>size</th>';
+	echo '<th>create time</th>';
+	echo '<th></th>';
+	echo '</tr>';
 	$i = 0;
 	foreach ($Objects as $Object) {
 		echo '<tr>';
@@ -21,13 +28,14 @@ if($bucketname){
 		}else{
 			echo '<td></td>';
 		}
+		echo '<td><a href="setACL.php?bucketname='.$bucketname.'&key='.$Object->Key.'&status=public">设置为共有</a></td>';
+		echo '<td><a href="setACL.php?bucketname='.$bucketname.'&key='.$Object->Key.'&status=private">设置为私有</a></td>';
+		echo '<td><a href="deleteObject.php?bucketname='.$bucketname.'&key='.$Object->Key.'">删除</a></td>';
 		echo '</tr>';
 		$i++;
 	}
 	echo '</table>';
 }
-
-
 
 
 // 判断是否是图片

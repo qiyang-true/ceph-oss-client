@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include 'header.php';
 
 $bucketname = $_GET['bucketname'];
 $key = $_GET['key'];
