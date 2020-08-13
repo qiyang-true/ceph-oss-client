@@ -31,20 +31,17 @@ $name = $_GET['update'] ? $_GET['update'] : 'base';
 </tr>
 </form>
 </table>
-
-
 <br>
 <br>
+
 <?php
 echo '<table>';
-echo '<tr>'; 
-echo '<td>当前配置：</td><td></td>';
-echo '</tr>'; 
-echo '<tr>'; 
-echo '<td>hostname</td><td>'.$settings['base']['hostname'].'</td>';
-echo '</tr>'; 
-echo 'secret'.$settings['base']['secret'].'<br>';
-echo 'port'.$settings['base']['port'].'<br>';
+echo '<tr><td>当前配置：</td><td>base</td></tr><tr>';
+echo '<td>hostname：</td><td>'.$settings['base']['hostname'].'</td>';
+echo '</tr><tr>'; 
+echo '<td>secret：</td><td>'.$settings['base']['secret'].'</td>';
+echo '</tr><tr>';
+echo '<td>port：</td><td>'.$settings['base']['port'].'</td>';
 echo '</tr>'; 
 echo '</table>'; 
 
