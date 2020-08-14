@@ -27,7 +27,7 @@ $name = $_GET['update'] ? $_GET['update'] : 'base';
 </tr>
 <tr>
 	<td></td>
-	<td><input type="submit"/></td>
+	<td><input type="submit" value="添加/修改"/></td>
 </tr>
 </form>
 </table>
@@ -56,13 +56,13 @@ foreach($settings as $key => $value) {
 	echo '<td>'.$settings[$key]['port'].'</td>';
 	echo '<td><a href="settings.php?type=choice-config&config='.$key.'">切换</a></td>';
 	echo '<td><a href="settings.php?update='.$key.'">修改</a></td>';
+	echo '<td><a href="settings.php?delete='.$key.'">删除</a></td>';
 	echo '</tr>';
 }
 echo '</table>';
 
-
-$conf = $_POST;
 if ($_POST['type'] == 'add-config'){
+	$conf = $_POST;
 	$new_config = [
 		$conf['config_name'] => [
 			'key'		=> $conf['config_key'],
@@ -80,11 +80,25 @@ if ($_GET['type'] == 'choice-config'){
 	$base = ['base' => $config[$conf]];
 	add_config($base);
 	header("location: /settings.php");
+}else
+if ($_GET['delete']){
+	delete_config($_GET['delete']);
+	header("location: /settings.php");
 }
 
 
 /*
-* param $config array
+* param $key string 要删除的配置段名称
+*/
+function delete_config($key){
+	$conf = parse_ini_file('settings.ini', true);
+	unset($conf[$key]);
+	file_put_contents('settings.ini', convert_array_to_ini($conf));
+}
+
+
+/*
+* param $config array 添加配置段到配置文件
 */
 function add_config($config){
 	$conf = parse_ini_file('settings.ini', true);
@@ -97,8 +111,8 @@ function add_config($config){
 
 
 /*
-* param $settings string
-* return array
+* param $settings array 数组转ini格式的配置
+* return string
 */
 function convert_array_to_ini($settings){
 	foreach($settings as $key => $value){
