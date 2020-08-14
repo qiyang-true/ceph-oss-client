@@ -16,7 +16,6 @@ if($bucketname){
 	$Objects = $ObjectsListResponse->body->Contents;
 	echo '<table>';
 	echo '<tr>';
-	echo '<th>num</th>';
 	echo '<th>Bucket</th>';
 	echo '<th>size</th>';
 	echo '<th>create time</th>';
@@ -25,7 +24,6 @@ if($bucketname){
 	$i = 0;
 	foreach ($Objects as $Object) {
 		echo '<tr>';
-		echo '<td>'.$i.'</td>';
 		echo '<td>'.$Object->Key.'</td>';
 		echo '<td>'.$Object->Size.'</td>';
 		echo '<td>'.$Object->LastModified.'</td>';
@@ -62,7 +60,6 @@ function getImageUrl($Connection, $bucketname, $key){
 ?>
 <script src="https://www.scriptjc.com/Public/js/jquery-1.8.0.min.js"></script>
 <script>
-//图像查看,在图片元素或图片的上一级元素上添加class="img" <img class="img">
 $('.img').live("mouseover mouseout",function(event){
 	if(event.type == "mouseover"){
 		var img = document.createElement("img");
