@@ -2,52 +2,19 @@
 include 'header.php';
 $settings = parse_ini_file('settings.ini', true);
 $name = $_GET['update'] ? $_GET['update'] : 'base';
-?>
-<table>
-<form action="settings.php" method="post">
-<input type="hidden" name="type" value="add-config"/>
-<tr>
-	<td>name:</td>
-	<td><input type="text" name="config_name" value="<?php echo $name;?>"/></td>
-</tr>
-<tr>
-	<td>key:</td>
-	<td><input type="text" name="config_key" value="<?php echo $settings[$name]['key'];?>"/></td>
-</tr>
-<tr>
-	<td>secret:</td>
-	<td><input type="text" name="config_secret" value="<?php echo $settings[$name]['secret'];?>"/></td>
-<tr>
-	<td>hostname:</td>
-	<td><input type="text" name="config_hostname" value="<?php echo $settings[$name]['hostname'];?>"/></td>
-</tr>
-<tr>
-	<td>port:</td>
-	<td><input type="text" name="config_port" value="<?php echo $settings[$name]['port'];?>"/></td>
-</tr>
-<tr>
-	<td></td>
-	<td><input type="submit" value="添加/修改"/></td>
-</tr>
-</form>
-</table>
-<br>
-<br>
 
-<?php
 echo '<table>';
-echo '<tr><td>当前配置：</td><td>base</td></tr><tr>';
-echo '<td>hostname：</td><td>'.$settings['base']['hostname'].'</td>';
-echo '</tr><tr>'; 
-echo '<td>secret：</td><td>'.$settings['base']['secret'].'</td>';
-echo '</tr><tr>';
-echo '<td>port：</td><td>'.$settings['base']['port'].'</td>';
-echo '</tr>'; 
-echo '</table>'; 
+echo '<tr><td>当前配置：</td><td>base</td></tr>';
+echo '<tr><td>hostname：</td><td>'.$settings['base']['hostname'].'</td></tr>';
+echo '<tr><td>secret：</td><td>'.$settings['base']['secret'].'</td></tr>';
+echo '<tr><td>port：</td><td>'.$settings['base']['port'].'</td></tr>';
+echo '</table>';
 
-unset($settings['base']);
 echo '<table border="1" cellspacing="0" cellpadding="1" >';
 foreach($settings as $key => $value) {
+	if ($key == 'base'){
+		continue;
+	}
 	echo '<tr>';
 	echo '<td>'.$key.'</td>';
 	echo '<td>'.$settings[$key]['hostname'].'</td>';
@@ -123,3 +90,33 @@ function convert_array_to_ini($settings){
 	}
 	return $config;
 }
+?>
+<br>
+<table>
+<form action="settings.php" method="post">
+<input type="hidden" name="type" value="add-config"/>
+<tr>
+	<td>name:</td>
+	<td><input type="text" name="config_name" value="<?php echo $name;?>"/></td>
+</tr>
+<tr>
+	<td>key:</td>
+	<td><input type="text" name="config_key" value="<?php echo $settings[$name]['key'];?>"/></td>
+</tr>
+<tr>
+	<td>secret:</td>
+	<td><input type="text" name="config_secret" value="<?php echo $settings[$name]['secret'];?>"/></td>
+<tr>
+	<td>hostname:</td>
+	<td><input type="text" name="config_hostname" value="<?php echo $settings[$name]['hostname'];?>"/></td>
+</tr>
+<tr>
+	<td>port:</td>
+	<td><input type="text" name="config_port" value="<?php echo $settings[$name]['port'];?>"/></td>
+</tr>
+<tr>
+	<td></td>
+	<td><input type="submit" value="添加/修改"/></td>
+</tr>
+</form>
+</table>
