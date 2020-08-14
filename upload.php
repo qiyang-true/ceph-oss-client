@@ -1,17 +1,16 @@
 <?php
 require 'connect.php';
 include 'header.php';
-require 'Upload.class.php';
 header('content-type:text/html;charset=utf-8');
 
 $bucketname = @$_POST['bucketname'];
 if ($bucketname){
-	$upload  = new Upload('image', './temp');
-	$path = './temp/'.$upload->newFileName;
-	$file = file_get_contents($path);
-	unlink($path);
-	$Connection->create_object($bucketname, $upload->newFileName, array(
-		'body' => $file,
+	$UP = $_FILES['image'];
+	$ext = '.'.pathinfo($UP['name'], PATHINFO_EXTENSION);
+	$newname = date('YmdHis').uniqid().rand().$ext;
+	move_uploaded_file($UP['tmp_name'], $UP['tmp_name'].$ext);
+	$Connection->create_object($bucketname, $newname, array(
+		'fileUpload' => $UP['tmp_name'].$ext,
 	));
 	header("location: /listBucket.php?bucketname=".$bucketname);
 }
